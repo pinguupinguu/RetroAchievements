@@ -368,3 +368,16 @@ achievement(title = "Elementary, My Dear", points = 5, badge = "00000",
     description = "Obtain the Basic Badge.",
     trigger = WasBitflagSetInGame(basicBadge())
 )
+
+// todo: look into the feasibility of higher difficulty levels once the Champion is beaten, since more of the world will be open, which should make some challenges e
+function funfestMissionId() => byte(0x2450a2)
+function p1FunfestMissionScore() => word(0x2450a8)
+function funfestMissionTimestamp() => dword(0x2450b4)
+
+achievement(title = "Berry Burst", points = 5, badge = "00000",
+    description = "Complete the objective for the 'Collect Berries!' Funfest Mission within thirty seconds.",
+    trigger = once(Delta(funfestMissionId()) == 0x0 && funfestMissionId() == 0x9) && never(funfestMissionId() == 0x0)
+        && trigger_when(p1FunfestMissionScore() >= 3)
+        && (always_false()
+            || never(repeated(SecondsToFrames(30), FrameHasAdvanced())) && unless(funfestMissionTimestamp() == 0xffffffff))
+)
