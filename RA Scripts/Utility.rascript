@@ -76,3 +76,24 @@ function CreateHitTargetedAndNextChain(permutation)
     
     return trigger
 }
+
+function Debug(string)
+{
+	achievement(title = string, description = "", points = 0, trigger = always_false())
+}
+
+function MergeArrays(arr1, arr2)
+{
+	ret = []
+	for e1 in arr1
+	{
+		array_push(ret, e1)
+	}
+	
+	for e2 in arr2
+	{
+		array_push(ret, e2)
+	}
+	
+	return ret
+}
